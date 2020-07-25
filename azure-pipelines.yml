@@ -20,15 +20,21 @@ steps:
   displayName: 'Install Node.js'
 
 - script: |
-  cd $(rootDir)
+    cd $(rootDir)
     npm install
     npm run build
     cd ..
   displayName: 'npm install and build'
-
 - task: ArchiveFiles@2
   inputs:
     rootFolderOrFile: '$(buildDir)'
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: '$(Build.BinariesDirectory)'
+    includeRootFolder: false
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    replaceExistingArchive: true
     includeRootFolder: false
     archiveType: 'zip'
     archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
