@@ -1,6 +1,5 @@
 trigger:
 - master
-- develop
 
 variables:
   rootDir: 'my-app'
